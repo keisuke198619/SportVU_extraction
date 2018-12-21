@@ -15,14 +15,14 @@ Extraction of motion data in basketball from SportVU .7z files
 
 
 ## Other programming language
-###R
+### R
 *[https://github.com/rajshah4/NBA_SportVu](https://github.com/rajshah4/NBA_SportVu)
 
-###Python: 
-*[https://github.com/sealneaward/nba-movement-data](https://github.com/sealneaward/nba-movement-data)
+### Python: 
+* [https://github.com/sealneaward/nba-movement-data](https://github.com/sealneaward/nba-movement-data)
 
 
-*[https://github.com/linouk23/NBA-Player-Movements](https://github.com/linouk23/NBA-Player-Movements)
+* [https://github.com/linouk23/NBA-Player-Movements](https://github.com/linouk23/NBA-Player-Movements)
 
 ## License
 
