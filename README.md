@@ -11,7 +11,7 @@ Extraction of motion data in basketball from SportVU .7z files
 
 ## Author
 
-*  **Keisuke Fujii** - [https://researchmap.jp/keisuke7401/?lang=english](https://researchmap.jp/keisuke7401/?lang=english)
+*  **Keisuke Fujii** - [https://sites.google.com/site/keisuke1986en/](https://sites.google.com/site/keisuke1986en/)
 
 
 ## Other programming language
