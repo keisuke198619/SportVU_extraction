@@ -45,8 +45,9 @@ for gm = 1:nfile
     end
     
     if isempty(jsonfile) %
-        [status,cmdout] = ... % note 7z.exe dir
-            system([unzipDir,' x -o',jsnDir,' ',dataDir,'\',file7z{gm,1}]);
+        [status,cmdout] = ... % execute 7z.exe: see setup_path_param.m
+            system([unzipcmd,' x -o',jsnDir,' ',dataDir,'\',file7z{gm,1}]);
+        
         jsonfile = dir(jsnDir);
         for f = length(jsonfile):-1:1
             if contains(jsonfile(f).name,'.json') == 0 % not json
@@ -264,18 +265,24 @@ for gm = 1:nfile
             end
         end
     end
+    
+    % Events
+	% 1: clock, 2: shotclock, 3-5: ball xyz (m), 6-15: 10 players' id  
+	% 16-25: 10 players' xy (m), 36-45: 10 players' jursey number, 46-55: 10  players' team
+    % you may use id for analysis, number for visualization.
+    
     for q = 1:4
         GameData.Events{q} = NaN(length(connectdat.events(q).clock(:,1)),55) ;
-        GameData.Events{q}(:,1) = connectdat.events(q).clock(:,1) ;
-        GameData.Events{q}(:,2) = connectdat.events(q).shotclock(:,1) ;
-        GameData.Events{q}(:,3:5) = connectdat.events(q).ball(:,1:3) ;
-        GameData.Events{q}(:,6:15) = connectdat.events(q).playerid(:,1:10) ;
+        GameData.Events{q}(:,1) = connectdat.events(q).clock(:,1) ; % clock 
+        GameData.Events{q}(:,2) = connectdat.events(q).shotclock(:,1) ; % shotclock
+        GameData.Events{q}(:,3:5) = connectdat.events(q).ball(:,1:3) ; % ball xyz
+        GameData.Events{q}(:,6:15) = connectdat.events(q).playerid(:,1:10) ; % 10 players' id  
         for pl = 1:10
-            GameData.Events{q}(:,15+pl*2-1) = connectdat.events(q).pos(pl,1,:) ;
-            GameData.Events{q}(:,16+pl*2-1) = connectdat.events(q).pos(pl,2,:) ;
+            GameData.Events{q}(:,15+pl*2-1) = connectdat.events(q).pos(pl,1,:) ; % 10 players' xy 
+            GameData.Events{q}(:,16+pl*2-1) = connectdat.events(q).pos(pl,2,:) ; 
         end
-        GameData.Events{q}(:,36:45) = connectdat.events(q).player(1:10,:).' ;
-        GameData.Events{q}(:,46:55) = connectdat.events(q).team(1:10,:).' ;
+        GameData.Events{q}(:,36:45) = connectdat.events(q).player(1:10,:).' ; % 10 players' number 
+        GameData.Events{q}(:,46:55) = connectdat.events(q).team(1:10,:).' ; % 10  players' team
         GameData.Events{q} = unique(GameData.Events{q},'rows','stable') ;
     end
     GameData.gameid = rawdat.gameid ;
