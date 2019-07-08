@@ -15,18 +15,21 @@ load([matDir,'Gamename']);
 nfile = length(Gamename) ;
 
 % movie ----------------------------------------------------------
-skip = 2 ;
-figure(1); set(gcf,'color',[1 1 1]) ;
+skip = 5 ;
 for gm = 1:nfile
     load([matDir,'GameData_',Gamename{gm,1}]) ;
-    for q = 1:4
+   
+    for q = 1:length(GameData.Events)
         filename = [GameData.filename,'_Q',num2str(q)];
         PosStr = {'Poss','Shot'} ; TeamStr = {GameData.home.abbreviation,GameData.visitor.abbreviation};
-        Start = 1 ; End = 500 ; % should change
-        eval(['v = VideoWriter(''',videoDir,'Game',Gamename{gm,1},'_',num2str(q),'Q','_',num2str(Start),'-',num2str(End),'.mp4'',''MPEG-4'');']);
+        
+        Start = 1 ; 
+        End = size(GameData.Events{q},1);% 2000 ; % should change
+        
+        eval(['v = VideoWriter(''',videoDir,'Q_Game',Gamename{gm,1},'_',num2str(q),'Q','_',num2str(Start),'-',num2str(End),'.mp4'',''MPEG-4'');']);
         open(v)
         figure(1); % faster if figure('visible','off');
-        set(gcf,'color',[1 1 1]) ;
+        set(gcf,'color',[1 1 1],'visible','off') ;
         for t = Start:skip:End
             % Court
             plotBasketCourt_Full(C,3) ;
