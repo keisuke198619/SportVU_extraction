@@ -29,4 +29,8 @@ end
 Fs = 25 ; % sampling frequency
 feet_m = 0.3048 ; 
 C = createBasketCourt_NBA_3D ; % court information
+Order = 2 ;  % filter order
+Nq = Fs/2 ;  % Nyquist frequency 
+Fc = 1 ; % cutoff frequency
+[b_filt,a_filt] = butter(Order, Fc/Nq, 'low') ;
 
