@@ -11,6 +11,7 @@ clear ; close all ;
 
 setup_path_param
 overwrite = 1 ;
+usefilter = 0 ; 
 
 % extract list including only 7z files---------------------------------------------
 filelist = dir(dataDir) ;
@@ -337,7 +338,9 @@ for gm = 1:nfile
                         connectdat.events(q).playerid = cat(1,connectdat.events(q).playerid,rawdat.events(ev).playerid) ;
                         % connectdat.events(q).pos = cat(3,connectdat.events(q).pos,rawdat.events(ev).pos) ;
                         tmp = reshape(rawdat.events(ev).pos,20,[])';
-                        tmp = nanfilt(tmp,b_filt,a_filt,Order) ;
+                        if usefilter == 1 % confirmed in 2016b with Signal Processing Toolbox 
+                            tmp = nanfilt(tmp,b_filt,a_filt,Order) ;
+                        end 
                         connectdat.events(q).pos = cat(3,connectdat.events(q).pos, reshape(tmp',10,2,[]));
                         connectdat.events(q).vel = cat(3,connectdat.events(q).vel, reshape(diff3p(tmp,Fs)',10,2,[])) ;
                         
