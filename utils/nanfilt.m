@@ -2,7 +2,7 @@ function y = nanfilt(data,b,a,Order)
 % column of data: time
 % each column has common nans (detect only first column)
 
-ind = find(isnan(data(:,2))) ;
+ind = find(any(isnan(data),2)) ;
 y = NaN(size(data)) ;
 
 if ~isempty(ind)  
